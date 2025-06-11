@@ -87,10 +87,10 @@ export default function Home() {
           >
             <CardHeader>
               <CardTitle className="truncate flex flex-col space-y-2">
-                <p>{post.name}</p>
                 <p>
-                  {post.id}.{post.email}
+                  {post.id}.{post.name}
                 </p>
+                <p >{post.email}</p>
               </CardTitle>
             </CardHeader>
             <CardContent className="line-clamp-3">
