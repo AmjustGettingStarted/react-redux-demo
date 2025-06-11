@@ -90,7 +90,7 @@ export default function Home() {
                 <p>
                   {post.id}.{post.name}
                 </p>
-                <p >{post.email}</p>
+                <p className="font-medium" >{post.email}</p>
               </CardTitle>
             </CardHeader>
             <CardContent className="line-clamp-3">
