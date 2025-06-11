@@ -6,13 +6,10 @@ export const jsonPlaceholderApi = createApi({
     baseUrl: "https://jsonplaceholder.typicode.com/",
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query<{ id: number; title: string }[], void>({
-      query: () => "posts"
+    getPosts: builder.query({
+      query: () => "posts",
     }),
-    createPosts: builder.mutation<
-      { id: number; title: string }[], // response type
-      Partial<{ title: string }> // argument type
-    >({
+    createPosts: builder.mutation({
       query: (newPost) => ({
         url: "posts",
         method: "POST",
