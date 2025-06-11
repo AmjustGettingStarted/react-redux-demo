@@ -83,18 +83,20 @@ export default function Home() {
         {data.map((post, i) => (
           <Card
             key={i}
-            className="hover:scale-105 shadow-sm hover:shadow-md transition-all duration-300 hover:border-slate-300"
+            className="hover:scale-105 shadow-sm hover:shadow-md transition-all duration-300 hover:border-slate-500 hover:bg-slate-200 bg-slate-100 "
           >
             <CardHeader>
-              <CardTitle>
-                {post.id}.{post.title}
+              <CardTitle className="truncate flex flex-col space-y-2">
+                <p>{post.name}</p>
+                <p>
+                  {post.id}.{post.email}
+                </p>
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-slate-600">{post.body}</p>
+            <CardContent className="line-clamp-3">
+              <p className="text-slate-600 ">{post.body}</p>
             </CardContent>
           </Card>
-          // <p key={i}>{post.title}</p>
         ))}
       </div>
       <div className="flex justify-center w-full py-4">
@@ -111,7 +113,7 @@ export default function Home() {
             <PaginationItem>
               <PaginationNext
                 className="cursor-pointer"
-                onClick={() => setPage((prev) => Math.min(prev + 1, 13))}
+                onClick={() => setPage((prev) => Math.min(prev + 1, 45))}
               />
             </PaginationItem>
           </PaginationContent>
