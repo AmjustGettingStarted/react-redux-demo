@@ -111,7 +111,7 @@ export default function Home() {
             <PaginationItem>
               <PaginationNext
                 className="cursor-pointer"
-                onClick={() => setPage((prev) => Math.min(prev + 1, 10))}
+                onClick={() => setPage((prev) => Math.min(prev + 1, 13))}
               />
             </PaginationItem>
           </PaginationContent>
