@@ -7,7 +7,7 @@ export const jsonPlaceholderApi = createApi({
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => `posts?_limit=8&_page=10`,
+      query: (page) => `posts?_limit=8&_page=${page}`,
     }),
     createPosts: builder.mutation({
       query: (newPost) => ({

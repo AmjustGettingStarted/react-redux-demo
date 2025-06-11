@@ -25,8 +25,10 @@ import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
+  const [page, setPage] = useState(1);
   const [newPost, setNewPost] = useState({ body: "", title: "" });
-  const { data, error, isLoading } = useGetPostsQuery();
+  const { data, error, isLoading } = useGetPostsQuery(page);
+
   const [createPost, { isLoading: isCreating, error: createError }] =
     useCreatePostsMutation();
 
@@ -94,25 +96,26 @@ export default function Home() {
           </Card>
           // <p key={i}>{post.title}</p>
         ))}
+      </div>
+      <div className="flex justify-center w-full py-4">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                className="cursor-pointer"
+                onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+              />
+            </PaginationItem>
+            <PaginationItem>{page}</PaginationItem>
 
-        <div>
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious href="#" />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#">1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext href="#" />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
+            <PaginationItem>
+              <PaginationNext
+                className="cursor-pointer"
+                onClick={() => setPage((prev) => Math.min(prev + 1, 10))}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );
