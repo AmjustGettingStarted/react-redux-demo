@@ -7,11 +7,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { Input } from "@/components/ui/input";
 import {
   useCreatePostsMutation,
   useGetPostsQuery,
 } from "@/services/jsonPlaceHolderApi";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
@@ -20,10 +30,15 @@ export default function Home() {
   const [createPost, { isLoading: isCreating, error: createError }] =
     useCreatePostsMutation();
 
-    const handleCreatePost = async () => {
-      await createPost(newPost)
-    }
-  if (isLoading) return <p>loading...</p>;
+  const handleCreatePost = async () => {
+    await createPost(newPost);
+  };
+  if (isLoading)
+    return (
+      <div className="h-[100vh] w-full flex items-center justify-center animate-spin">
+        <Loader2 size={30} />
+      </div>
+    );
   if (createError) return <p>There was an error creating the post</p>;
   if (error) return <p>There was an error </p>;
 
@@ -53,7 +68,11 @@ export default function Home() {
             setNewPost((prev) => ({ ...prev, body: e.target.value }))
           }
         />
-        <Button variant="destructive" className="cursor-pointer" onClick={handleCreatePost}>
+        <Button
+          variant="destructive"
+          className="cursor-pointer"
+          onClick={handleCreatePost}
+        >
           Create Post
         </Button>
       </div>
@@ -75,6 +94,25 @@ export default function Home() {
           </Card>
           // <p key={i}>{post.title}</p>
         ))}
+
+        <div>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
     </div>
   );
