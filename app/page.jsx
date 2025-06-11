@@ -10,6 +10,9 @@ export default function Home() {
   return (
     <div>
       <h1>Hello</h1>
+      <div>{data.map((post,i)=>(
+        <p key={i}>{post.title}</p>
+      ))}</div>
     </div>
   );
 }
