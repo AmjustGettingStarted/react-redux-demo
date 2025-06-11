@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const jsonPlaceholderApi = createApi({
   reducerPath: "jsonPlaceholderApi",
@@ -6,8 +6,13 @@ export const jsonPlaceholderApi = createApi({
     baseUrl: "https://jsonplaceholder.typicode.com/",
   }),
   endpoints: (builder) => ({
-    getPosts: builder.query({ query: () => "posts" }),
-    createPosts: builder.mutation({
+    getPosts: builder.query<{ id: number; title: string }[], void>({
+      query: () => "posts"
+    }),
+    createPosts: builder.mutation<
+      { id: number; title: string }[], // response type
+      Partial<{ title: string }> // argument type
+    >({
       query: (newPost) => ({
         url: "posts",
         method: "POST",
@@ -16,3 +21,5 @@ export const jsonPlaceholderApi = createApi({
     }),
   }),
 });
+
+export const { useGetPostsQuery, useCreatePostsMutation } = jsonPlaceholderApi;
